@@ -33,12 +33,26 @@ weather_data = JSON.parse(response)
 # Use a loop to display the daily summary for the upcoming forecast.
 
 # 1. inspect the weather_data hash
-# puts weather_data
+puts "In #{weather_data["region"]} it is currently #{weather_data["currentConditions"]["temp"]["f"]} degrees and #{weather_data["currentConditions"]["comment"].downcase}."
+puts "The rest of today will be a high of #{weather_data["next_days"][0]["max_temp"]["f"]} and #{weather_data["next_days"][0]["comment"].downcase}."
+puts "The upcoming weather forecast is:"
+index = 1
+loop do
+    if index == weather_data["next_days"].size
+        break
+    else     
+        puts "#{weather_data["next_days"][index]["day"]}: a high of #{weather_data["next_days"][index]["max_temp"]["f"]} and #{weather_data["next_days"][index]["comment"].downcase}."
+    index = index + 1
+    end
+end
 
 # CHALLENGE
 # Can you display the weather forecast summary for a user-entered city?
 # Use the following code at the very top of the file and then replace "chicago" in the api url with the user-entered city:
-# puts "What city are you in?"
-# city = gets.chomp
-# puts city
+#puts "What city are you in?"
+#city = gets.chomp
+#puts city
+city = "Chicago"
+
+#puts weather_data["currentConditions"]["temp"]["c"]
 # Note: what happens if the user-entered value is not a known city? You'll want to do some error handling.
